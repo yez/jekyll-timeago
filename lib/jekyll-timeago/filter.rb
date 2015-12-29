@@ -30,11 +30,13 @@ module Jekyll
       end
 
       def options
-        @options ||= setup
+        setup
       end
 
       # Restore default configuration
       def reset!
+        @setup = nil
+
         setup
       end
 
@@ -56,7 +58,7 @@ module Jekyll
 
       # Configure plugin options with defaults
       def setup
-        @options = {
+        @setup ||= {
           :depth         => jekyll_config['depth'] || DEFAULT_DEPTH_LEVEL,
           :today         => jekyll_config['today'] || 'today',
           :yesterday     => jekyll_config['yesterday'] || 'yesterday',
